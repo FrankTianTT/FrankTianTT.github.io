@@ -1,0 +1,15 @@
+#!/usr/local/bin/expect
+puts "post-receive script is called!"
+
+spawn ssh root@106.14.92.14
+expect "*password:"
+send "000320Onethree!\r"
+expect "*~#" 
+send "cd /home/frank\r "
+send "sh auto_pull.sh\r"
+expect "*~#"
+
+puts "pull in server success!"
+expect eof
+
+exit
