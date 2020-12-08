@@ -108,3 +108,9 @@ deploy:
     github: https://github.com/FrankTianTT/franktiantt.github.io.git
     gitee: https://gitee.com/franktian424/franktian424.git
   branch: master
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
