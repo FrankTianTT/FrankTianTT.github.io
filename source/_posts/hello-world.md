@@ -1,41 +1,14 @@
 ---
-title: Hello World
+title: 这个网站被开通了
+date: 2020-12-8 12:12:12
 tags:
-  - Testing
-  - Another Tag
+  - talk
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
+用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。
 
-### Create a new post
+网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。
 
-``` bash
-$ hexo new "My New Post"
-```
+同时，这个网站还被我同步到了github page和gitee page，具体的教程应该在下一篇文章，两个网站的网址是franktiantt.github.io和franktian424.gitee.io。
 
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+就这样吧。

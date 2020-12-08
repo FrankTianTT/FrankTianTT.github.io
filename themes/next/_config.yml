@@ -129,8 +129,9 @@ scheme: Mist
 social:
   GitHub: https://github.com/FrankTianTT || github
   E-Mail: mailto:franktian424@qq.com || envelope
-  知乎: https://www.zhihu.com/people/tian-hong-long-29
+  知乎: https://www.zhihu.com/people/tian-hong-long-29 || 
   豆瓣: https://www.douban.com/people/212216723/
+  微博: https://weibo.com/u/3235671194 || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -656,7 +657,7 @@ tabs:
 
 # Use velocity to animate everything.
 motion:
-  enable: true
+  enable: false
   async: false
   transition:
     # Transition variants:
