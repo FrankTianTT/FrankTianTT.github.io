@@ -1,6 +1,7 @@
 ---
-title: about
+title: 关于我
 date: 2020-12-08 17:26:13
+type: "about"
 ---
 
 一个垃圾程序员罢了。
