@@ -4,7 +4,7 @@
 
 # Site
 title: Frank Tian's Page
-subtitle: ''
+subtitle: r'Frank Tian's Page'
 description: ''
 keywords:
 author: Frank Tian
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: http://blog.franktian.xyz/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
