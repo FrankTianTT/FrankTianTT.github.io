@@ -105,5 +105,5 @@ theme: next
 deploy:
   type: git
   repo: 
-    github: https://github.com/FrankTianTT/franktiantt.github.io.git:master
-    gitee: https://gitee.com/franktian424/franktian424.git:master
+    github: https://github.com/FrankTianTT/franktiantt.github.io.git/tree/master
+    gitee: https://gitee.com/franktian424/franktian424.git/tree/master
