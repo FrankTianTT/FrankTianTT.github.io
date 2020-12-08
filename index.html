@@ -332,10 +332,12 @@
 <p>总的来说，就是用Hexo在阿里云的服务器渲染网站页面，同时又把页面的提交到了github page和gitee page上，让这两个网站也可以同步我的网站。最后实现了自动pull和push的功能，让我可以在我们Mac上专注写文字，然后用一个脚本解决所有问题。</p>
 <p>在这里我们不贴一堆乱七八糟的代码了，把主要流程和借鉴的博客贴上来好了。</p>
 <p>首先是在Linux上建立Hexo，要安装nvm和Node.js，以及包管理工具npm。服务器上可能无法访问raw.githubusercontent.com，可以参考GitHub520这个项目。然后就是建立目录，初始化Hexo项目，再把NexT这个主题放到对应的目录下。随便改一改主题，挑一个自己喜欢的。然后可以把github和gitee的master分支加入Hexo的deploy配置中，而整个项目保存在dev分支中。</p>
+<p>这部分主要参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010725842/article/details/80672739">Linux下使用Hexo搭建github博客</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44555878/article/details/106588253">hexo博客部署并同步更新到服务器</a>。Hexo和NexT的用法很容易搜到。</p>
+<p>此外，在阿里云中将端口号映射为二级域名可以通过<a target="_blank" rel="noopener" href="https://blog.csdn.net/zz_aiytag/article/details/108868654">阿里云二级域名解析到指定端口号的一种方法</a>的一种方法实现。</p>
 <p>接下来在本地clone下来，写个脚本自动登陆到远程的服务器上，从gitee的dev上pull下来，然后push到github上的dev中。最后<code>hexo generate</code>和<code>hexo deploy</code>。</p>
-<p>我是用的是<code>expect</code>脚本登陆服务器，<code>git pull</code>要输入密码的话也可以用<code>expect</code>脚本。</p>
-<p>在服务器上<code>git pull</code>可能会有冲突，可以先<code>git fetch</code>然后<code>git --hard reset gitee/dev</code>最后再<code>git pull</code>。</p>
-<p>此外还有一些坑，百度上都能搜到我就不记录了，毕竟我又不是程序员。</p>
+<p>我是用的是<code>expect</code>脚本登陆服务器，<code>git pull</code>要输入密码的话也可以用<code>expect</code>脚本。<code>expect</code>脚本的教程也很好找，一个值得注意的坑是<code>expect</code>的转义字符，例如<code>$</code>是<code>\\\$</code>详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/secondjanuary/article/details/21775953">expect需要转义的符号列表</a>。</p>
+<p>在服务器上<code>git pull</code>可能会有冲突，可以先<code>git fetch</code>然后<code>git --hard reset gitee/dev</code>最后再<code>git pull</code>。他们的区别可以看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/runnerjack/p/9342362.html">git fetch &amp; pull详解</a>。</p>
+<p>此外还有一些坑，例如hexo有一些依赖库要装，百度上都能搜到我就不记录了，毕竟我又不是程序员。</p>
 
           
         
