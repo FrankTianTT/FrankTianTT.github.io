@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Distributional DQN</title>
+    <url>/2020/12/10/Distributional%20DQN/</url>
+    <content><![CDATA[<p>这篇文章介绍了关于Distributional DQN的三篇文章，这三篇论文的作者差不多是同一拨人，都来自Deep Mind，之后微软还有一篇后续的工作，有时间再贴上来。</p>
+<p>所谓的Distributional DQN，指的是对于一个<span class="math inline">\((s,a)\)</span>对，我们不再用一个<strong>值</strong>来评估它，而是使用一个<strong>分布</strong>去评价这个状态和动作的好坏。我们用<span class="math inline">\(Z(s,a)\)</span>表示这个分布，而之前的<span class="math inline">\(Q(s,a)\)</span>则是<span class="math inline">\(Z(s,a)\)</span>的<strong>期望</strong>。</p>
+<a id="more"></a>
+<h2 id="用bellman算子理解动态规划">用Bellman算子理解动态规划</h2>
+<p>如果你对强化学习本身已经非常熟悉，可以考虑跳过这一节的内容。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hexo中marked和mathjax冲突的问题</title>
+    <url>/2020/12/10/Hexo%E4%B8%ADmarked%E5%92%8Cmathjax%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>最近打算在博客上整理一些论文笔记，发现hexo默认支持的marked渲染和我附加的mathjax渲染是冲突的，主要有包括两个符号，<code>\</code>和<code>_</code>。</p>
+<a id="more"></a>
+<p>网上冲浪了一下找到了三种解决方案，分别是</p>
+<ul>
+<li>手动在<code>\</code>和<code>_</code>前面添加转义符，或者在公式前后用保护块，其实用python正则表达式替换一下也不麻烦，但是我是强迫症，放弃。</li>
+<li>更改marked.js的代码，把marked处理<code>\</code>和<code>_</code>的部分去掉，留着这两个符号给mathjax处理，但是我是强迫症，放弃。</li>
+<li>使用pandoc，把原来的marked卸载掉。</li>
+</ul>
+<p>显然最后我选择了第三种方法。</p>
+<p>主要就是卸载掉原来的渲染引擎<code>npm uninstall hexo-renderer-marked</code>，并安装pandoc<code>npm install hexo-renderer-pandoc</code>。注意pandoc是需要安装在本地的，在ubuntu下用<code>apt</code>安装就好了。在Mac上还有一个坑，我在下载Anaconda的时候它自带了一个版本很久的pandoc，和Hexo使用的pandoc有冲突，需要卸载掉Anaconda自带的，然后手动去官网上安装。</p>
+<p>解决问题后我又找到了NexT官方给出的解决方案<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/MATH.md">数学公式</a>，不过里面有一些东西已经随着NexT本身的更新消失了。</p>
+<p>总之就是非常烦。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>不做程序员</tag>
+        <tag>写个博客怎么这么多坑</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>建站攻略</title>
     <url>/2020/12/08/%E5%BB%BA%E7%AB%99%E6%94%BB%E7%95%A5/</url>
     <content><![CDATA[<p>让我来总结一下这个网站的主要技术。</p>
@@ -21,34 +55,6 @@
       <tags>
         <tag>不做程序员</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>这个网站被开通了</title>
-    <url>/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
-    <content><![CDATA[<p>用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。</p>
-<a id="more"></a>
-
-<p>网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。</p>
-<p>同时，这个网站还被我同步到了github page和gitee page，具体的教程应该在下一篇文章，两个网站的网址是franktiantt.github.io和franktian424.gitee.io。</p>
-<p>就这样吧。</p>
-]]></content>
-      <categories>
-        <category>唠嗑</category>
-      </categories>
-      <tags>
-        <tag>开张撒花</tag>
-        <tag>白嫖</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Distributional DQN</title>
-    <url>/2020/12/10/Distributional%20DQN/</url>
-    <content><![CDATA[<p>这篇文章介绍了关于Distributional DQN的三篇文章，这三篇论文的作者差不多是同一拨人，都来自Deep Mind，之后微软还有一篇后续的工作，有时间再贴上来。</p>
-<p>所谓的Distributional DQN，指的是对于一个<span class="math inline">\((s,a)\)</span>对，我们不再用一个<strong>值</strong>来评估它，而是使用一个<strong>分布</strong>去评价这个状态和动作的好坏。我们用<span class="math inline">\(Z(s,a)\)</span>表示这个分布，而之前的<span class="math inline">\(Q(s,a)\)</span>则是<span class="math inline">\(Z(s,a)\)</span>的<strong>期望</strong>。</p>
-<a id="more"></a>
-<h2 id="用bellman算子理解动态规划">用Bellman算子理解动态规划</h2>
-<p>如果你对强化学习本身已经非常熟悉，可以考虑跳过这一节的内容。</p>
-]]></content>
   </entry>
   <entry>
     <title>用Bellman算子理解动态规划</title>
@@ -172,5 +178,22 @@
 <p>即</p>
 <p><span class="math inline">\(v_{\pi_*}= \mathbf v_*\)</span></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>这个网站被开通了</title>
+    <url>/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
+    <content><![CDATA[<p>用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。</p>
+<a id="more"></a>
+<p>网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。</p>
+<p>同时，这个网站还被我同步到了github page和gitee page，具体的教程应该在下一篇文章，两个网站的网址是franktiantt.github.io和franktian424.gitee.io。</p>
+<p>就这样吧。</p>
+]]></content>
+      <categories>
+        <category>唠嗑</category>
+      </categories>
+      <tags>
+        <tag>开张撒花</tag>
+        <tag>白嫖</tag>
+      </tags>
   </entry>
 </search>
