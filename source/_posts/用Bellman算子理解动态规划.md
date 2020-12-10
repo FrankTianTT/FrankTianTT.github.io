@@ -1,6 +1,7 @@
 ---
 title: 用Bellman算子理解动态规划
 date: 2020-12-10 11:48:30
+mathjax: true
 tags:
 ---
 

@@ -97,6 +97,7 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+
 ## Themes: https://hexo.io/themes/
 theme: next
 
@@ -114,3 +115,10 @@ search:
   field: post
   format: html
   limit: 10000
+
+pandoc:
+  filters:
+  extra:
+  template:
+  meta:
+  mathEngine: mathjax
