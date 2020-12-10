@@ -24,4 +24,4 @@ tags:
 
 解决问题后我又找到了NexT官方给出的解决方案[数学公式](https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/MATH.md)，不过里面有一些东西已经随着NexT本身的更新消失了。
 
-总之就是非常烦。
+总之就是非常烦😡。
