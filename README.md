@@ -4,3 +4,7 @@
 - Local Search：`npm install hexo-generator-searchdb --save`
 - NexT主题渲染：`npm install hexo-renderer-swig`
 - git部署：`npm install --save hexo-deployer-git`
+
+npm install hexo-renderer-pandoc --save
+
+npm install hexo-asset-image --save
