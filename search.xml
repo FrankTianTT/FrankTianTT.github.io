@@ -24,7 +24,7 @@
 <p>显然最后我选择了第三种方法。</p>
 <p>主要就是卸载掉原来的渲染引擎<code>npm uninstall hexo-renderer-marked</code>，并安装pandoc<code>npm install hexo-renderer-pandoc</code>。注意pandoc是需要安装在本地的，在ubuntu下用<code>apt</code>安装就好了。在Mac上还有一个坑，我在下载Anaconda的时候它自带了一个版本很久的pandoc，和Hexo使用的pandoc有冲突，需要卸载掉Anaconda自带的，然后手动去官网上安装。</p>
 <p>解决问题后我又找到了NexT官方给出的解决方案<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/MATH.md">数学公式</a>，不过里面有一些东西已经随着NexT本身的更新消失了。</p>
-<p>总之就是非常烦。</p>
+<p>总之就是非常烦😡。</p>
 ]]></content>
       <categories>
         <category>技术</category>
