@@ -77,15 +77,15 @@
 
 
 
-<meta name="description" content="讲个笑话，小时候我一直以为这个世界只有我有意识，其他人都是机器人来着。 但我很快又意识到，他们可能是共享内存的，于是你和一个人说的一句话，可以被世界上的所有人听到，我干的坏事总会被其他人发现。于是我就不怎么干坏事了。 更好玩的是，我发现，你爱上了一个人，其实就爱上了整个世界。  请叫我Frank，此外尽量不要提起有关软件学院的话题，我老PTSD了。 我对人工智能感兴趣，尤其是通用人工智能的实现。我">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://blog.franktian.xyz/about/index.html">
+<meta name="description" content="这片文章算是对Distributional DQN的补充内容，介绍了一些value-based的基本概念以及收敛性的证明。 下面的内容主要是对这个slides的整理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Bellman算子理解动态规划">
+<meta property="og:url" content="http://blog.franktian.xyz/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
 <meta property="og:site_name" content="Frank Tian&#39;s Page">
-<meta property="og:description" content="讲个笑话，小时候我一直以为这个世界只有我有意识，其他人都是机器人来着。 但我很快又意识到，他们可能是共享内存的，于是你和一个人说的一句话，可以被世界上的所有人听到，我干的坏事总会被其他人发现。于是我就不怎么干坏事了。 更好玩的是，我发现，你爱上了一个人，其实就爱上了整个世界。  请叫我Frank，此外尽量不要提起有关软件学院的话题，我老PTSD了。 我对人工智能感兴趣，尤其是通用人工智能的实现。我">
+<meta property="og:description" content="这片文章算是对Distributional DQN的补充内容，介绍了一些value-based的基本概念以及收敛性的证明。 下面的内容主要是对这个slides的整理。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-12-08T09:26:13.000Z">
-<meta property="article:modified_time" content="2020-12-08T15:02:40.830Z">
+<meta property="article:published_time" content="2020-12-10T03:48:30.000Z">
+<meta property="article:modified_time" content="2020-12-10T05:35:40.057Z">
 <meta property="article:author" content="Frank Tian">
 <meta name="twitter:card" content="summary">
 
@@ -117,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.franktian.xyz/about/"/>
+  <link rel="canonical" href="http://blog.franktian.xyz/2020/12/10/用Bellman算子理解动态规划/"/>
 
 
 
 
 
-  <title>关于我 | Frank Tian's Page</title>
+  <title>用Bellman算子理解动态规划 | Frank Tian's Page</title>
   
 
 
@@ -292,44 +292,255 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.franktian.xyz/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frank Tian's Page">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于我</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>讲个笑话，小时候我一直以为这个世界只有我有意识，其他人都是机器人来着。</p>
-<p>但我很快又意识到，他们可能是共享内存的，于是你和一个人说的一句话，可以被世界上的所有人听到，我干的坏事总会被其他人发现。于是我就不怎么干坏事了。</p>
-<p>更好玩的是，我发现，你爱上了一个人，其实就爱上了整个世界。</p>
-<hr>
-<p>请叫我Frank，此外尽量不要提起有关软件学院的话题，我老PTSD了。</p>
-<p>我对人工智能感兴趣，尤其是通用人工智能的实现。我小时候的梦想是成为科学家，现在也是。只有成为机甲驾驶员可能让我放弃这个职业。</p>
-<p>现阶段，我的主要精力放在了有关深度强化学习的研究中。剩下的精力用来陪女朋友。</p>
-<hr>
-<p>最喜欢的运动是骑自行车，偶尔去健身房，但是看起来越来越胖了。</p>
-<p>喜欢刷知乎，此外因为海贼王完结了，打算有时间捡起儿时的回忆，再刷一遍伟大航线上的征程。</p>
-<p>去先锋书店买了本纯粹理性批判，希望我能读完。</p>
-
+          <h1 class="post-title" itemprop="name headline">用Bellman算子理解动态规划</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-10T11:48:30+08:00">
+                2020-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>这片文章算是对Distributional DQN的补充内容，介绍了一些value-based的基本概念以及收敛性的证明。</p>
+<p>下面的内容主要是对这个<a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cme241/lecture_slides/BellmanOperators.pdf">slides</a>的整理。</p>
+<a id="more"></a>
+<h2 id="value-functions-as-vectors">Value Functions as Vectors</h2>
+<p>首先，我们尝试把一个<strong>函数</strong>看作一个<strong>向量</strong>，这可能是泛函中最基本的概念。</p>
+<p>我们假设在状态空间<span class="math inline">\(\mathcal{S}\)</span>中有<span class="math inline">\(n\)</span>个状态</p>
+<p><span class="math inline">\(\left\{s_{1}, s_{2}, \dots, s_{m}\right\}\)</span></p>
+<p>在动作空间<span class="math inline">\(\mathcal{A}\)</span>中有<span class="math inline">\(m\)</span>个状态</p>
+<p><span class="math display">\[\left\{a_{1}, a_{2}, \dots, a_{m}\right\}\]</span></p>
+<p>当然在连续的情形就是<span class="math inline">\(n = \infty\)</span>或者<span class="math inline">\(m = \infty\)</span>，不过它们依旧可以表示为一系列向量。</p>
+<p>我们的随机策略定义为<span class="math inline">\(\pi(a | s)\)</span>。</p>
+<p>那么值函数定义为<span class="math inline">\(\mathbf{v}: \mathcal{S} \to \mathbb{R}\)</span>，当然值函数是针对某个策略<span class="math inline">\(\pi\)</span>而言的，也就是</p>
+<p><span class="math display">\[\mathbf{v}_{\pi}: \mathcal{S} \to \mathbb{R}\]</span></p>
+<p>最优值函数被定义为</p>
+<p><span class="math display">\[\mathbf{v}_{*}(s)=\max _{\pi} \mathbf{v}_{\pi}(s)\]</span></p>
+<p>定义$_{s}^{a} <span class="math inline">\(是在状态\)</span>s<span class="math inline">\(做动作\)</span>a$得到奖赏的期望。</p>
+<p>定义<span class="math inline">\(\mathcal{P}_{s, s^{\prime}}^{a}\)</span>是在状态<span class="math inline">\(s\)</span>做动作<span class="math inline">\(a\)</span>到达状态<span class="math inline">\(s^\prime\)</span>的概率。</p>
+<p>那么我们可以用<span class="math inline">\(\mathbf{R}_{\pi}(s)\)</span>表示对于这个策略<span class="math inline">\(\pi\)</span>，在状态<span class="math inline">\(s\)</span>下可能获得的“奖赏的期望”的期望。（第一个期望来自环境的不确定性，第二个期望来自策略的不确定性）</p>
+<p><em>{}(s)=</em>{a<span class="math inline">\(\in \mathcal{A}} \pi(a | s) \cdot \mathcal{R}_{s}^{a}\)</span></p>
+<p>用<span class="math inline">\(\mathbf{P}_{\pi}\left(s, s^{\prime}\right)\)</span>表示对于这个策略<span class="math inline">\(\pi\)</span>，从状态<span class="math inline">\(s\)</span>转移到状态<span class="math inline">\(s^\prime\)</span>的概率。</p>
+<p>_{}(s,<span class="math inline">\(s^{\prime}\right)=\sum_{a \in \mathcal{A}} \pi(a | s) \cdot \mathcal{P}_{s, s^{\prime}}^{a}\)</span></p>
+<p>我们用<span class="math inline">\(\mathbf{R}_{\pi}\)</span>表示向量<span class="math inline">\(\left[\mathbf{R}_{\pi}\left(s_{1}\right), \mathbf{R}_{\pi}\left(s_{2}\right), \ldots, \mathbf{R}_{\pi}\left(s_{n}\right)\right]\)</span>，用<span class="math inline">\(\mathbf{P}_{\pi}\)</span>表示矩阵, 1 i, i^{} n$。</p>
+<p>定义<span class="math inline">\(\gamma\)</span>为MDP折扣因子。</p>
+<p>Bellman Operators</p>
+<p>补充，算子operator，可以粗浅的理解为</p>
+<p>函数的输入是集合，输出是集合</p>
+<p>泛函的输入是函数，输出是集合</p>
+<p>算子的输入是函数，输出是函数</p>
+<p>Bellman$Policy Operator _{} <span class="math inline">\(作为一个算子，是针对策略\)</span><span class="math inline">\(而言的，它作用于函数\)</span>v$之上</p>
+<p><em>{}$=</em>{}+_{} </p>
+<p><em>{} <span class="math inline">\(是一个线性的算子，有不动点\)</span>v</em><span class="math inline">\(，即\)</span><em>{} </em>{}=_{}$。</p>
+<p>这个不动点由$<em>{} <span class="math inline">\(决定，本质上是由\)</span></em>{} <span class="math inline">\(，\)</span>_{} <span class="math inline">\(和\)</span>$决定。</p>
+<p>还有算子Bellman<span class="math inline">\(Optimality Operator \mathbf{B}_{*}\)</span>，被定义为</p>
+<p>(_{*}$)(s)=<em>{a}{</em>{s}^{a}+<em>{s^{} } </em>{s, s<sup>{}}</sup>{a} (s^{})}</p>
+<p>_{*}$并不依赖于某个具体的策略。</p>
+<p>_{*} 也有不动点<span class="math inline">\(\mathbf{v}_{*}\)</span>，满足_{*}$_{*}=_{*} $。</p>
+<p>这个不动点由<span class="math inline">\(\mathbf{B}_{*}\)</span>决定，本质上是由$<em>{s}^{a} <span class="math inline">\(，\)</span></em>{s, s<sup>{}}</sup>{a}<span class="math inline">\(和\)</span>$决定。</p>
+<p>接下来我们定义一个greedy的策略<span class="math inline">\(G(\mathbf{v})(s)\)</span>，<span class="math inline">\(G\)</span>是一个算子，输入是函数<span class="math inline">\(\mathbf{v}: \mathcal{S} \to \mathbb{R}\)</span>，输出是函数${}:  </p>
+<p>G()(s)={<em>{s}^{a}+</em>{s^{} } _{s, s<sup>{}}</sup>{a} (s^{})}$</p>
+<p>这意味着<span class="math inline">\(G(\mathbf{v})\)</span>其实就是一个策略<span class="math inline">\(\pi\)</span>。</p>
+<p>接下来，值得注意的是，对任何值函数<span class="math inline">\(\mathbf{v}\)</span>，满足</p>
+<p>_{G()}<span class="math inline">\(\mathbf{v}=\mathbf{B}_{*} \mathbf{v}\)</span></p>
+<p>注意<span class="math inline">\(\mathbf{B}_{*} \mathbf{v}\)</span>并不一定满足<span class="math inline">\(\mathbf{B}_{*} \mathbf{v} = \mathbf{v}\)</span>，上面的式子其实就是做了<span class="math inline">\(\underset{a}{\arg \max }\$和\)</span>$的转换。</p>
+<p>Contraction<span class="math inline">\(and Monotonicity of\)</span>Operators</p>
+<p>接下来我们定义<span class="math inline">\(\gamma -\text{contraction operators}\)</span>，如果一个算子<span class="math inline">\(\mathbf{B}\)</span>满足，对任意两个值函数<span class="math inline">\(\mathbf v_1,\mathbf v_2\)</span>，有</p>
+<p>|<span class="math inline">\(\mathbf{v}_{1}-\mathbf{B}\mathbf{v}_{2}\right\|_{\infty} \leq \gamma\left\|\mathbf{v}_{1}-\mathbf{v}_{2}\right\|_{\infty}\)</span></p>
+<p>那么我们说这个算子<span class="math inline">\(\mathbf{B}\)</span>在<span class="math inline">\(L^{\infty}\)</span>上是<span class="math inline">\(\gamma -\text{contraction operators}\)</span>。</p>
+<p>可以证明，前面的$<em>{} <span class="math inline">\(和\)</span></em>{*}$都满足上面的性质。</p>
+<p>我们可以对离散的情况做一个简单的证明，因为状态空间<span class="math inline">\(\mathcal S\)</span>是一个有限集，任何策略的值函数都可以表示为<span class="math inline">\(\mathbf v_{\pi} = \{\mathbf v_{\pi}(s_1),\mathbf v_{\pi}(s_2),\cdots,\mathbf v_{\pi}(s_n)\}\)</span></p>
+<p>而策略状态转移矩阵$ _{} <span class="math inline">\(则是一个\)</span>nn$的矩阵。</p>
+<p>对于<span class="math inline">\(L^{\infty}\)</span>，一个有限向量<span class="math inline">\(\mathbf x\)</span>的<span class="math inline">\(L^{\infty}\)</span>其实就是<span class="math inline">\(\mathbf x\)</span>中最大的元素，也就是说</p>
+<p>||_{}<span class="math inline">\(= \max_i \mathbf x_i\)</span></p>
+<p>实际上，把<span class="math inline">\(\mathbf x\)</span>看作一个集合，<span class="math inline">\(L^{\infty}\)</span>就是在衡量这个集合的直径。</p>
+<p>接下来，我们根据上面的说明做一个简单的证明。</p>
+<p>对于Bellman$Policy Operator _{} $，有</p>
+<p>\begin{aligned}$ |<em>{} </em>{1}-<em>{} </em>{2}|<em>{}&amp;=| </em>{}+<em>{}  - </em>{}+<em>{} |</em>{} \ &amp;=| <em>{}  - </em>{} |<em>{} \ &amp;=| </em>{} ( - )|_{} \ &amp;=<em>i</em>{} ( - )<em>i\ &amp; <em>i ( - )<em>i \ &amp; =|</em>{1}-</em>{2}|</em>{}\ \end{aligned}$</p>
+<p>中间那个小于等于号很显然，是因为<span class="math inline">\(\mathbf{P}_{\pi}\)</span>是一个状态转移矩阵，每行的值都小于<span class="math inline">\(1\)</span>，而合等于$1 <span class="math inline">\(，也就是说乘上\)</span>_{}$相当于做了一次加权平均，自然不会让变得更大。</p>
+<p>对于Bellman<span class="math inline">\(Optimality Operator \mathbf{B}_{*}\)</span>，我们先说明<span class="math inline">\(\mathbf{B}_{*} \mathbf{v}\)</span>的形式，在<span class="math inline">\(\mathbf{v}\)</span>是有限集的情况下，<span class="math inline">\(\mathbf{B}_{*} \mathbf{v}\)</span>可以被表示成一个向量</p>
+<p>_{*}<span class="math inline">\(\mathbf{v} = \left(\max _{a}\left\{\mathcal{R}_{s _1}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_1, s^{\prime}}^{a} \cdot \mathbf{v}\left(s^{\prime}\right)\right\}, \\ \max _{a}\left\{\mathcal{R}_{s_2}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_2, s^{\prime}}^{a} \cdot \mathbf{v}\left(s^{\prime}\right)\right\},\\ \cdots\\ \max _{a}\left\{\mathcal{R}_{s_n}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_n, s^{\prime}}^{a} \cdot \mathbf{v}\left(s^{\prime}\right)\right\}\right)\)</span></p>
+<p>那么对于$_{*}  - _{*}  $，有</p>
+<p>_{*}<span class="math inline">\(\mathbf{v_1} - \mathbf{B}_{*} \mathbf{v_2} =\\ \left(\max _{a}\left\{\mathcal{R}_{s _1}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_1, s^{\prime}}^{a} \cdot \mathbf{v_1}\left(s^{\prime}\right)\right\} - \max _{a}\left\{\mathcal{R}_{s _1}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_1, s^{\prime}}^{a} \cdot \mathbf{v_2}\left(s^{\prime}\right)\right\}, \\ \max _{a}\left\{\mathcal{R}_{s_2}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_2, s^{\prime}}^{a} \cdot \mathbf{v_1}\left(s^{\prime}\right)\right\}-\max _{a}\left\{\mathcal{R}_{s_2}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_2, s^{\prime}}^{a} \cdot \mathbf{v_2}\left(s^{\prime}\right)\right\},\\ \cdots\\ \max _{a}\left\{\mathcal{R}_{s_n}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_n, s^{\prime}}^{a} \cdot \mathbf{v_1}\left(s^{\prime}\right)\right\}-\max _{a}\left\{\mathcal{R}_{s_n}^{a}+\gamma \sum_{s^{\prime} \in \mathcal{S}} \mathcal{P}_{s_n, s^{\prime}}^{a} \cdot \mathbf{v_2}\left(s^{\prime}\right)\right\}\right)\)</span></p>
+<p>注意，实际上<span class="math inline">\(\max_a\)</span>可以看作对一个长度为<span class="math inline">\(|\mathcal A |\)</span>的向量用<span class="math inline">\(L^{\infty}\)</span>，也就是<span class="math inline">\(\max_a\)</span>满足三角不等式，于是，对于$_{*}  - _{*}  $的每一个元素，有</p>
+<p>\begin{aligned}$ &amp;<em>{a}{</em>{s_n}^{a}+<em>{s^{} } </em>{s_n, s<sup>{}}</sup>{a} (s<sup>{})}-<em>{a}{</em>{s_n}</sup>{a}+<em>{s^{} } </em>{s_n, s<sup>{}}</sup>{a} (s^{})} \ &amp;<em>{a}{</em>{s_n}^{a}+<em>{s^{} } </em>{s_n, s<sup>{}}</sup>{a} (s<sup>{})-<em>{s_n}^{a}+</em>{s</sup>{} } <em>{s_n, s<sup>{}}</sup>{a} (s^{})}\ &amp;=</em>{a}{<em>{s^{} } </em>{s_n, s<sup>{}}</sup>{a} ( (s<sup>{})-(s</sup>{}) )}\ \end{aligned}$</p>
+<p>同时，无论怎样选择<span class="math inline">\(a\)</span>，<span class="math inline">\(\mathcal{P}_{s, s^{\prime}}^{a}\)</span>都是一个概率转移矩阵，和<span class="math inline">\(\mathbf{P}_{\pi}\)</span>有类似的特点，相当于取加权，于是同理得到</p>
+<p>|<em>{<em>}$ <em>{1}-</em>{</em>} </em>{2}|<em>{} |</em>{1}-<em>{2}|</em>{}$</p>
+<p>证明了$<em>{} <span class="math inline">\(和\)</span></em>{<em>}<span class="math inline">\(都是\)</span>-<span class="math inline">\(，由Contraction\)</span>Mapping<span class="math inline">\(Theorem，我们可以得到\)</span><em>{} <span class="math inline">\(和\)</span></em>{</em>}$都含有唯一的不动点。</p>
+<p>接下来，我们定义值函数之间的小于，如果<span class="math inline">\(\mathbf{v}_{1}\leq \mathbf{v}_{2}\)</span>，意味着对于所有的<span class="math inline">\(s\)</span>满足</p>
+<p>_{1}(s)<span class="math inline">\(\leq \mathbf{v}_{2}(s)\)</span></p>
+<p>不难证明</p>
+<p>\begin{array}{l}$ <em>{1} </em>{2} <em>{} </em>{1} <em>{} </em>{2} \ <em>{1} </em>{2} <em>{<em>} <em>{1} </em>{</em>} </em>{2} \end{array}$</p>
+<p>也就是说$<em>{} <span class="math inline">\(和\)</span></em>{*}$都是单调的。</p>
+<p>Policy Evaluation</p>
+<p>有了上面的推导，我们就可以很直观的看待策略评估的过程了。</p>
+<p>对于任何策略<span class="math inline">\(\pi\)</span>，我们可以得到$<em>{} <span class="math inline">\(，那么策略评估就是在找到\)</span></em>{} $的不动点。</p>
+<p>根据Contraction<span class="math inline">\(Mapping\)</span>Theorem，对任何值函数<span class="math inline">\(\mathbf v\)</span>都有</p>
+<p><span class="math inline">\(_{N \to \infty} \mathbf{B}_{\pi}^{N} \mathbf{v}=\mathbf{v}_{\pi}\)</span></p>
+<p>这保证了我们可以从一个随机的起点出发，不断按照Bellman方程更新值函数<span class="math inline">\(\mathbf v\)</span>，从而收敛到<span class="math inline">\(\mathbf{v}_{\pi}\)</span>。</p>
+<p>Policy Improvement</p>
+<p>接下来我们分析策略提升的过程。</p>
+<p>在第<span class="math inline">\(k\)</span>次迭代中，我们计算得到了当前的策略<span class="math inline">\({\pi_{k}}\)</span>，对这个策略进行策略评估，我们得到相应的值函数 <em>{</em>{k}}。</p>
+<p>那么策略提升的过程就是令<span class="math inline">\(\pi_{k+1}\)</span>满足</p>
+<p><em>{k+1}=G(</em>{_{k}})</p>
+<p>现在我们想证明存在<span class="math inline">\(\pi_{k+1} \geq \pi_{k}\)</span>，从而保证策略提升一定会让策略变得更好。</p>
+<p>还记得我们之前说</p>
+<p>_{G()}<span class="math inline">\(\mathbf{v}=\mathbf{B}_{*} \mathbf{v}\)</span></p>
+<p>于是有</p>
+<p>_{*}<span class="math inline">\(\mathbf{v}_{\pi_{\mathbf{k}}}=\mathbf{B}_{G\left(\mathbf{v}_{\pi_{\mathbf{k}}}\right)} \mathbf{v}_{\pi_{\mathbf{k}}}=\mathbf{B}_{\pi_{k+1}} \mathbf{v}_{\pi_{\mathbf{k}}}\)</span></p>
+<p>根据定义，显然对所有对值函数<span class="math inline">\(\mathbf v\)</span>有<span class="math inline">\(\mathbf{B}_{*} \mathbf{v} \geq \mathbf{B}_{\pi} \mathbf{v}\)</span>，于是</p>
+<p>_{*}<span class="math inline">\(\mathbf{v}_{\pi_{k}} \geq \mathbf{B}_{\pi_{k}} \mathbf{v}_{\pi_{k}}=\mathbf{v}_{\pi_{k}}\)</span></p>
+<p>结合上面的式子得到</p>
+<p><em>{</em>{k+1}}<span class="math inline">\(\mathbf{v}_{\pi_{\mathbf{k}}} \geq \mathbf{v}_{\pi_{\mathbf{k}}}\)</span></p>
+<p>这说明对值函数进行$<em>{</em>{k+1}} $算子的运算是一个单调递增的过程，也就是说</p>
+<p><em>{</em>{k+1}}^{N}<span class="math inline">\(\mathbf{v}_{\pi_{\mathbf{k}}} \geq \ldots \mathbf{B}_{\pi_{k+1}}^{2} \mathbf{v}_{\pi_{\mathbf{k}}} \geq \mathbf{B}_{\pi_{k+1}} \mathbf{v}_{\pi_{\mathbf{k}}} \geq \mathbf{v}_{\pi_{\mathbf{k}}}\)</span></p>
+<p>而又有</p>
+<p><em>{</em>{+1}}=<span class="math inline">\(_{N \to \infty} \mathbf{B}_{*}^{N} \mathbf{v}_{\pi_{\mathrm{k}}}=\lim _{N \to \infty} \mathbf{B}_{\pi_{k+1}}^{N} \mathbf{v}_{\pi_{\mathrm{k}}}\)</span></p>
+<p>于是</p>
+<p><em>{</em>{+1}}=$<em>{N } </em>{<em>{k+1}}^{N} </em>{<em>{}} </em>{_{}}</p>
+<p>Policy$Iteration</p>
+<p>我们之前完成了策略提升的证明，在第<span class="math inline">\(k + 1\)</span>个策略迭代中，我们可以保证单调，也就是<span class="math inline">\(\mathbf{v}_{\pi_{\mathbf{k}+1}} \geq \mathbf{v}_{\pi_{\mathbf{k}}}\)</span>。</p>
+<p>于是，当<span class="math inline">\(\mathbf{v}_{\pi_{\mathbf{k}+1}}=\mathbf{v}_{\pi_{\mathbf{k}}}\)</span>，我们就找到了<span class="math inline">\(\mathbf{v}_{*}\)</span>，这是因为$_{<em>} <em>{} <span class="math inline">\(，同时\)</span></em>{</em>}$又只有一个不动点。</p>
+<p>Value$Iteration</p>
+<p>Value<span class="math inline">\(Iteration的思想就是干脆绕开\)</span>B_<span class="math inline">\(，直接让\)</span>B_*$参与运算。</p>
+<p>因为我们知道$_{*} <span class="math inline">\(有唯一的不动点\)</span>_{*}<span class="math inline">\(满足\)</span>_{*} _{*}=_{*}<span class="math inline">\(，而\)</span>_{*} <span class="math inline">\(又是一个单调递增的运算，因为对于任意的值函数\)</span>v$，有</p>
+<p><span class="math inline">\(_{N \to \infty} \mathbf{B}_{*}^{N} \mathbf{v}=\mathbf{v}_{*}\)</span></p>
+<p>这保证了值迭代的可行性。</p>
+<p>Greedy<span class="math inline">\(Policy from Optimal VF is an Optimal\)</span>Policy</p>
+<p>最后要证明的是Greedy<span class="math inline">\(Policy from Optimal VF is an Optimal\)</span>Policy。</p>
+<p>其实很简单了，我们已经得到了最优值函数<span class="math inline">\(\mathbf v_*\)</span>，我们贪心的选择策略，也就是</p>
+<p>_*<span class="math inline">\(= G(\mathbf v_*)\)</span></p>
+<p>那么根据最优值函数的定义，我们只需要反过来证明<span class="math inline">\(\mathbf v_{\pi_*}= \mathbf v_*\)</span>即可。</p>
+<p>首先我们有</p>
+<p><em>{G(</em>{*})}<span class="math inline">\(\mathbf{v}_{*}=\mathbf{B}_{*} \mathbf{v}_{*}\)</span></p>
+<p>因<span class="math inline">\(\mathbf v_*\)</span>是不动点，因此满足</p>
+<p><em>{G(</em>{*})}<span class="math inline">\(\mathbf{v}_{*}=\mathbf{B}_{*} \mathbf{v}_{*} = \mathbf{v}_{*}\)</span></p>
+<p>这意味着<span class="math inline">\(\mathbf{v}_{*}\)</span>也是<span class="math inline">\(\mathbf{B}_{G\left(\mathbf{v}_{*}\right)}\)</span>的不动点。而<span class="math inline">\(\mathbf{B}_{G\left(\mathbf{v}_{*}\right)}\)</span>又只有一个不动点<span class="math inline">\(\mathbf{v}_{G\left(\mathbf{v}_{*}\right)}\)</span>，因此</p>
+<p>_{<em>}=<em>{G(</em>{</em>})}</p>
+<p>即</p>
+<p><span class="math inline">\(v_{\pi_*}= \mathbf v_*\)</span></p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/10/Distributional%20DQN/" rel="next" title="Distributional DQN">
+                <i class="fa fa-chevron-left"></i> Distributional DQN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -362,8 +573,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -457,6 +677,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#value-functions-as-vectors"><span class="nav-number">1.</span> <span class="nav-text">Value Functions as Vectors</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
