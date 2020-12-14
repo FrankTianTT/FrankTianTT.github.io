@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hexo中marked和mathjax冲突的问题</title>
-    <url>/blog/2020/12/10/Hexo%E4%B8%ADmarked%E5%92%8Cmathjax%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <url>/2020/12/10/Hexo%E4%B8%ADmarked%E5%92%8Cmathjax%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>最近打算在博客上整理一些论文笔记，发现hexo默认支持的marked渲染和我附加的mathjax渲染是冲突的，主要有包括两个符号，<code>\</code>和<code>_</code>。</p>
 <a id="more"></a>
 <p>网上冲浪了一下找到了三种解决方案，分别是</p>
@@ -26,7 +26,7 @@
   </entry>
   <entry>
     <title>建站攻略</title>
-    <url>/blog/2020/12/08/%E5%BB%BA%E7%AB%99%E6%94%BB%E7%95%A5/</url>
+    <url>/2020/12/08/%E5%BB%BA%E7%AB%99%E6%94%BB%E7%95%A5/</url>
     <content><![CDATA[<p>让我来总结一下这个网站的主要技术。</p>
 <p>总的来说，就是用Hexo在阿里云的服务器渲染网站页面，同时又把页面的提交到了github page和gitee page上，让这两个网站也可以同步我的网站。最后实现了自动pull和push的功能，让我可以在我的Mac上专注写文字，然后用一个脚本解决所有问题。</p>
 <a id="more"></a>
@@ -48,7 +48,7 @@
   </entry>
   <entry>
     <title>这个网站被开通了</title>
-    <url>/blog/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
+    <url>/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
     <content><![CDATA[<p>用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。</p>
 <a id="more"></a>
 <p>网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。</p>
@@ -65,7 +65,7 @@
   </entry>
   <entry>
     <title>用Bellman算子理解动态规划</title>
-    <url>/blog/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+    <url>/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
     <content><![CDATA[<p>这片文章算是对Distributional DQN的补充内容，介绍了一些value-based的基本概念以及收敛性的证明。</p>
 <p>下面的内容主要是对这个<a href="https://web.stanford.edu/class/cme241/lecture_slides/BellmanOperators.pdf">slides</a>的整理。</p>
 <a id="more"></a>
