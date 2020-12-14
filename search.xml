@@ -47,23 +47,6 @@
       </tags>
   </entry>
   <entry>
-    <title>这个网站被开通了</title>
-    <url>/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
-    <content><![CDATA[<p>用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。</p>
-<a id="more"></a>
-<p>网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。</p>
-<p>同时，这个网站还被我同步到了github page和gitee page，具体的教程应该在下一篇文章，两个网站的网址是franktiantt.github.io和franktian424.gitee.io。</p>
-<p>就这样吧。</p>
-]]></content>
-      <categories>
-        <category>唠嗑</category>
-      </categories>
-      <tags>
-        <tag>开张撒花</tag>
-        <tag>白嫖</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>用Bellman算子理解动态规划</title>
     <url>/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
     <content><![CDATA[<p>这片文章算是对Distributional DQN的补充内容，介绍了一些value-based的基本概念以及收敛性的证明。</p>
@@ -197,19 +180,46 @@
     <content><![CDATA[<p>单纯是记录一下最近的（摸鱼）生活……</p>
 <a id="more"></a>
 <p>昨天晚上和今天早上下了南京的初雪！</p>
-<p><img src="/.xyz//南京的初雪.jpg"></p>
+<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南京的初雪.jpg"></p>
 <p>不过拍的不是很好就是啦……</p>
 <p>以及，上周末还去了栖霞山，虽然感觉不怎么样hhhh</p>
 <p>上山的红叶</p>
-<p><img src="/.xyz//栖霞山的红叶.jpg"></p>
-<p><img src="/.xyz//栖霞山的红叶2.jpg"></p>
+<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶.jpg"></p>
+<figure>
+<img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶2.jpg" alt="栖霞山的红叶2"><figcaption>栖霞山的红叶2</figcaption>
+</figure>
 <p>以及学校的黄叶</p>
-<p><img src="/.xyz//南园教学楼.jpg"></p>
-<p><img src="/.xyz//不小心入镜的我.jpg"></p>
+<figure>
+<img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/学校的黄叶.jpg" alt="学校的黄叶"><figcaption>学校的黄叶</figcaption>
+</figure>
+<figure>
+<img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南园教学楼.jpg" alt="南园教学楼"><figcaption>南园教学楼</figcaption>
+</figure>
+<p>还有不小心入镜的我</p>
+<figure>
+<img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/不小心入镜的我.jpg" alt="不小心入镜的我"><figcaption>不小心入镜的我</figcaption>
+</figure>
 ]]></content>
       <tags>
         <tag>日常</tag>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>这个网站被开通了</title>
+    <url>/2020/12/08/%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E8%A2%AB%E5%BC%80%E9%80%9A%E4%BA%86/</url>
+    <content><![CDATA[<p>用了一堆奇奇怪怪的技术让我闲置了小半年的服务器和域名发挥余热。准备这段时间把知乎和其他地方的文章陆陆续续整理过来，算是做个汇总。</p>
+<a id="more"></a>
+<p>网站现在被托管在阿里云的一个小服务器上，人生第一次见到一核的CPU，还以为htop出bug了。考虑有机会把它搞到自己的机器上，不过要等我分到一个固定ip再说。说起来，最近看到一个想法， 说可以把域名直接映射到ipv6上，然后分配ipv6，这样就省去DNS服务了，amazing。</p>
+<p>同时，这个网站还被我同步到了github page和gitee page，具体的教程应该在下一篇文章，两个网站的网址是franktiantt.github.io和franktian424.gitee.io。</p>
+<p>就这样吧。</p>
+]]></content>
+      <categories>
+        <category>唠嗑</category>
+      </categories>
+      <tags>
+        <tag>开张撒花</tag>
+        <tag>白嫖</tag>
       </tags>
   </entry>
 </search>
