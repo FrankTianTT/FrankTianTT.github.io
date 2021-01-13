@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="日常,生活," />
+  <meta name="keywords" content="闲的蛋疼,浪费时间,不务正业," />
 
 
 
@@ -77,26 +77,22 @@
 
 
 
-<meta name="description" content="单纯是记录一下最近的（摸鱼）生活……">
+<meta name="description" content="我把闲置的服务器用来做种了，做种的文件放在另一块硬盘中，远程用浏览器监控Transmission的运行情况。 所以需要折腾的技术有以下几部分：  把硬盘格式化，自动挂载，修改权限 更改Transmission的设置，把负责做种的账户改成自己 更改Transmission的设置，允许远程访问。  改Transmission的设置遇到的坑我真是数都数不过来。。。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录一下最近的生活">
-<meta property="og:url" content="http://blog.franktian.xyz/2020/12/14/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%9C%80%E8%BF%91%E7%9A%84%E7%94%9F%E6%B4%BB/index.html">
+<meta property="og:title" content="Transmission服务器端搭建">
+<meta property="og:url" content="http://blog.franktian.xyz/2021/01/13/Transmission%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Frank Tian&#39;s Page">
-<meta property="og:description" content="单纯是记录一下最近的（摸鱼）生活……">
+<meta property="og:description" content="我把闲置的服务器用来做种了，做种的文件放在另一块硬盘中，远程用浏览器监控Transmission的运行情况。 所以需要折腾的技术有以下几部分：  把硬盘格式化，自动挂载，修改权限 更改Transmission的设置，把负责做种的账户改成自己 更改Transmission的设置，允许远程访问。  改Transmission的设置遇到的坑我真是数都数不过来。。。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南京的初雪.jpg">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶.jpg">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶2.jpg">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/学校的黄叶.jpg">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南园教学楼.jpg">
-<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/不小心入镜的我.jpg">
-<meta property="article:published_time" content="2020-12-14T13:48:55.000Z">
-<meta property="article:modified_time" content="2020-12-14T15:58:21.325Z">
+<meta property="og:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/image-20210113153823441.png">
+<meta property="article:published_time" content="2021-01-13T07:23:46.000Z">
+<meta property="article:modified_time" content="2021-01-13T08:15:02.032Z">
 <meta property="article:author" content="Frank Tian">
-<meta property="article:tag" content="日常">
-<meta property="article:tag" content="生活">
+<meta property="article:tag" content="闲的蛋疼">
+<meta property="article:tag" content="浪费时间">
+<meta property="article:tag" content="不务正业">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南京的初雪.jpg">
+<meta name="twitter:image" content="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/image-20210113153823441.png">
 
 
 
@@ -126,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.franktian.xyz/2020/12/14/记录一下最近的生活/"/>
+  <link rel="canonical" href="http://blog.franktian.xyz/2021/01/13/Transmission服务器端搭建/"/>
 
 
 
 
 
-  <title>记录一下最近的生活 | Frank Tian's Page</title>
+  <title>Transmission服务器端搭建 | Frank Tian's Page</title>
   
 
 
@@ -313,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.franktian.xyz/2020/12/14/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%9C%80%E8%BF%91%E7%9A%84%E7%94%9F%E6%B4%BB/">
+    <link itemprop="mainEntityOfPage" href="http://blog.franktian.xyz/2021/01/13/Transmission%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -330,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记录一下最近的生活</h1>
+          <h1 class="post-title" itemprop="name headline">Transmission服务器端搭建</h1>
         
 
         <div class="post-meta">
@@ -342,8 +338,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-14T21:48:55+08:00">
-                2020-12-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-13T15:23:46+08:00">
+                2021-01-13
               </time>
             
 
@@ -352,6 +348,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -380,20 +398,82 @@
       
 
       
-        <p>单纯是记录一下最近的（摸鱼）生活……</p>
+        <p>我把闲置的服务器用来做种了，做种的文件放在另一块硬盘中，远程用浏览器监控Transmission的运行情况。</p>
+<p>所以需要折腾的技术有以下几部分：</p>
+<ul>
+<li>把硬盘格式化，自动挂载，修改权限</li>
+<li><p>更改Transmission的设置，把负责做种的账户改成自己</p></li>
+<li><p>更改Transmission的设置，允许远程访问。</p></li>
+</ul>
+<p>改Transmission的设置遇到的坑我真是数都数不过来。。。</p>
 <a id="more"></a>
-<p>昨天晚上和今天早上下了南京的初雪！</p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南京的初雪.jpg"></p>
-<p>不过拍的不是很好就是啦……</p>
-<p>以及，上周末还去了栖霞山，虽然感觉不怎么样hhhh</p>
-<p>上山的红叶</p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶.jpg"></p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/栖霞山的红叶2.jpg"></p>
-<p>以及学校的黄叶</p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/学校的黄叶.jpg"></p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/南园教学楼.jpg"></p>
-<p>还有不小心入镜的我</p>
-<p><img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/不小心入镜的我.jpg"></p>
+<h2 id="part-1">Part 1</h2>
+<p>使用<code>df</code>和<code>du</code>两个指令查看磁盘的情况，可以查看RetHat官方的<a target="_blank" rel="noopener" href="https://www.redhat.com/sysadmin/du-vs-df">文章</a>（复习的时候看到RetHat的商业模式是免费试用，付费咨询，老增值模式了）。</p>
+<p>简单来说<code>df</code>是<code>disk free</code>，查看磁盘的<strong>大小</strong>，<strong>使用</strong>和<strong>剩余</strong>。通常使用<code>df -h</code>，可以把字节以”方便人类阅读“的形式展现。</p>
+<p><code>du</code>是<code>disk usage</code>，更多用来查看子目录的使用情况。</p>
+<p>当然，这是针对挂载了的硬盘而言的，我就是查看之后发现我的硬盘容量岌岌可危才打算在机械硬盘上做种的。</p>
+<p>用<code>fdisk</code>指令查看所有的磁盘情况。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk -l</span><br></pre></td></tr></table></figure>
+<p>我的服务器上有两块空闲的磁盘</p>
+<figure>
+<img src="https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/image-20210113153823441.png" alt="image-20210113153823441"><figcaption>image-20210113153823441</figcaption>
+</figure>
+<p>一块固态，一块机械。</p>
+<p>接下来对硬盘进行分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p>进入硬盘管理模式后，输入<code>n</code>创建新的分区，然后跟着提示走就行。</p>
+<p>提示会以此让你选</p>
+<ul>
+<li>Partition type</li>
+<li>Partition number</li>
+<li>Frist sector</li>
+<li>Last sector</li>
+</ul>
+<p>最后输入<code>w</code>保存设置。</p>
+<p>注意，如果Partition type不能从0开始选，或者Partition number不能从2048开始选，说明你的磁盘可能有其他区。</p>
+<p>如果想删除其他分区，同样使用<code>fdisk</code>，然后输入<code>d</code>，之后跟着提示走就行。</p>
+<p>分区好了之后要格式化，格式化为<code>ext4</code>格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sda</span><br></pre></td></tr></table></figure>
+<p>最后新建个文件夹，挂载就行，比如我把机械硬盘挂载在<code>MHD</code>文件夹下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir MDH</span><br><span class="line">sudo mount /dev/sda ~/MHD</span><br></pre></td></tr></table></figure>
+<p>但是这样的缺点是每次开机都要重新手动挂载，我们可以让机器启动时自动挂载。</p>
+<p>用<code>blkid</code>获取磁盘的uuid和属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure>
+<p>找到你要挂载的，记住它的uuid，在<code>/etc/fstab</code>添上一行自动挂载的语句</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>模版是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=&#123;你的硬盘的uuid&#125;  /u01  ext4  defaults  1  1</span><br></pre></td></tr></table></figure>
+<p>别忘了设着硬盘的所有者为你</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R frank:frank ~/MHD</span><br></pre></td></tr></table></figure>
+<h2 id="part-2">Part 2</h2>
+<p>安装<code>transmission-daemon</code>，这玩意是transmission的守护进程，它会帮你下载<code>transmission-cli</code>什么的。不过我们配置好了就不需要用命令行了（用命令行做种也太古早了）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install transmission-daemon</span><br></pre></td></tr></table></figure>
+<p>下载好了它就会自动开启，这时候要先关闭它</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service transmission-daemon stop</span><br></pre></td></tr></table></figure>
+<p>把配置文件中的USER改成你自己</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/init.d/transmission-daemon</span><br></pre></td></tr></table></figure>
+<p>下面的也是，把USER改成你自己</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/transmission-daemon.service</span><br></pre></td></tr></table></figure>
+<p>最后给配置文件的用户改成你自己</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R frank:frank /etc/transmission-daemon</span><br><span class="line">sudo chown -R frank:frank /var/lib/transmission-daemon/</span><br></pre></td></tr></table></figure>
+<p>现在还不能启动，要再把网络权限改一下</p>
+<h2 id="part-3">Part 3</h2>
+<p>打开<code>/etc/transmission-daemon/settings.json</code></p>
+<p>要更改的是下面的内容</p>
+<ul>
+<li>rpc-username改成远程登录想用的用户名</li>
+<li>rpc-password改成远程登录想用的密码</li>
+<li>rpc-whitelist改成"*.*.*.*"，或者把rpc-whitelist-enabled改成false</li>
+</ul>
+<p>这个还有一个坑，似乎是自动挂载的问题，就是它开始可能不会读这个文件的内容，还要改一下<code>~/.config/transmission-daemon/settings.json</code>的内容，把这个cp过去就好了。</p>
+<p>注意这个文件的拥有者也要是你自己。</p>
+<p>最后，介绍一个很好用的web界面，仓库地址是https://github.com/ronggang/transmission-web-control。</p>
+<p>下载releases的版本之后安装就好了。</p>
+<h2 id="part-4">Part 4</h2>
+<p>打开守护进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service transmission-daemon start</span><br></pre></td></tr></table></figure>
+<p>在自己的电脑上打开网页<code>&#123;服务器的ip&#125;:9091</code></p>
+<p>Enjoy it!</p>
 
       
     </div>
@@ -411,9 +491,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
+            <a href="/tags/%E9%97%B2%E7%9A%84%E8%9B%8B%E7%96%BC/" rel="tag"># 闲的蛋疼</a>
           
-            <a href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"># 生活</a>
+            <a href="/tags/%E6%B5%AA%E8%B4%B9%E6%97%B6%E9%97%B4/" rel="tag"># 浪费时间</a>
+          
+            <a href="/tags/%E4%B8%8D%E5%8A%A1%E6%AD%A3%E4%B8%9A/" rel="tag"># 不务正业</a>
           
         </div>
       
@@ -426,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/12/10/%E7%94%A8Bellman%E7%AE%97%E5%AD%90%E7%90%86%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="next" title="用Bellman算子理解动态规划">
-                <i class="fa fa-chevron-left"></i> 用Bellman算子理解动态规划
+              <a href="/2020/12/14/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%9C%80%E8%BF%91%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="next" title="记录一下最近的生活">
+                <i class="fa fa-chevron-left"></i> 记录一下最近的生活
               </a>
             
           </div>
@@ -435,10 +517,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/01/13/Transmission%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" rel="prev" title="Transmission服务器端搭建">
-                Transmission服务器端搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -490,8 +568,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -585,6 +672,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-1"><span class="nav-number">1.</span> <span class="nav-text">Part 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-2"><span class="nav-number">2.</span> <span class="nav-text">Part 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-3"><span class="nav-number">3.</span> <span class="nav-text">Part 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-4"><span class="nav-number">4.</span> <span class="nav-text">Part 4</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
