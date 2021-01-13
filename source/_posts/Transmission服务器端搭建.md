@@ -40,9 +40,7 @@ sudo fdisk -l
 
 我的服务器上有两块空闲的磁盘
 
-![image-20210113153823441](https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/image-20210113153823441.png)
-
-一块固态，一块机械。
+![一块固态，一块机械](https://franktian-blog.oss-cn-beijing.aliyuncs.com/img/image-20210113153823441.png)
 
 接下来对硬盘进行分区
 
