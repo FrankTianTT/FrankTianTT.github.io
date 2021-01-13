@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="不做程序员," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="好不容易把web作业写完了，把报告贴在这里，鉴于不出一个月我就会把知识还出去（也不知道还给谁，毕竟都是自学的），这博客上开贴留念一下。 完整项目在这里，欢迎star。（不会真有人star吧） 本项目借鉴了这个项目，大家也可以去star。 结果展示 实现的功能：  主页面，登陆页面，注册页面 注册密码两次输入 验证码检验  使用的技术  使用MongoDB作为后端数据库保存用户信息 使用node.j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web作业遗产：node.js+express+mongodb+ajax实现注册、登陆、验证码">
+<meta property="og:url" content="http://blog.franktian.xyz/2021/01/13/web%E4%BD%9C%E4%B8%9A%E9%81%97%E4%BA%A7/index.html">
+<meta property="og:site_name" content="Frank Tian&#39;s Page">
+<meta property="og:description" content="好不容易把web作业写完了，把报告贴在这里，鉴于不出一个月我就会把知识还出去（也不知道还给谁，毕竟都是自学的），这博客上开贴留念一下。 完整项目在这里，欢迎star。（不会真有人star吧） 本项目借鉴了这个项目，大家也可以去star。 结果展示 实现的功能：  主页面，登陆页面，注册页面 注册密码两次输入 验证码检验  使用的技术  使用MongoDB作为后端数据库保存用户信息 使用node.j">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226160547957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226160708586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226161156553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226161216516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226161304738.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201226161313528.png">
+<meta property="article:published_time" content="2021-01-13T08:22:37.000Z">
+<meta property="article:modified_time" content="2021-01-13T08:26:04.084Z">
+<meta property="article:author" content="Frank Tian">
+<meta property="article:tag" content="不做程序员">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201226160547957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.franktian.xyz/2021/01/13/web作业遗产/"/>
+
+
+
+
+
+  <title>web作业遗产：node.js+express+mongodb+ajax实现注册、登陆、验证码 | Frank Tian's Page</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc8eb9bc8d648a1ab13a34a5be5b7ca7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Frank Tian's Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个有趣的人的无聊网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.franktian.xyz/2021/01/13/web%E4%BD%9C%E4%B8%9A%E9%81%97%E4%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frank Tian's Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web作业遗产：node.js+express+mongodb+ajax实现注册、登陆、验证码</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-13T16:22:37+08:00">
+                2021-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>好不容易把web作业写完了，把报告贴在这里，鉴于不出一个月我就会把知识还出去（也不知道还给谁，毕竟都是自学的），这博客上开贴留念一下。</p>
+<p>完整项目在<a target="_blank" rel="noopener" href="https://github.com/FrankTianTT/login-express">这里</a>，欢迎star。（不会真有人star吧）</p>
+<p>本项目借鉴了<a target="_blank" rel="noopener" href="https://github.com/Lemon-Yan/node-login">这个项目</a>，大家也可以去star。</p>
+<h2 id="结果展示">结果展示</h2>
+<p>实现的功能：</p>
+<ul>
+<li>主页面，登陆页面，注册页面</li>
+<li>注册密码两次输入</li>
+<li>验证码检验</li>
+</ul>
+<p>使用的技术</p>
+<ul>
+<li>使用<strong>MongoDB</strong>作为后端数据库保存用户信息</li>
+<li>使用<strong>node.js</strong>部署前端</li>
+<li>采用<strong>ajax</strong>实现前端与服务器交换数据</li>
+</ul>
+<p>直接输入网址（http://localhost:8008/）进入主界面，提示需要登陆</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201226160547957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>进入注册界面注册账号</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201226160708586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>注册成功进入主页面</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201226161156553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>也可以从登陆界面进入 <img src="https://img-blog.csdnimg.cn/20201226161216516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI2MzM0Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /> ## 环境配置</p>
+<h3 id="mongodb">MongoDB</h3>
+<p>在ubuntu20.04下安装MongoDB</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mongodb</span><br></pre></td></tr></table></figure>
+<p>在项目目录下建立MongoDB的数据和日志目录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="built_in">log</span></span><br><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+<p>启动MongoDB</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath ./data/ --logpath ./<span class="built_in">log</span>/mongod.log --fork</span><br></pre></td></tr></table></figure>
+<p>检查MongoDB是否已经启动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep mongo</span><br></pre></td></tr></table></figure>
+<p>输出为</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201226161304738.png" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>说明启动成功。</p>
+<p>检查MongoDB监听的默认端口</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:27017</span><br></pre></td></tr></table></figure>
+<p>输出为</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20201226161313528.png" alt="在这里插入图片描述" /><figcaption>在这里插入图片描述</figcaption>
+</figure>
+<p>和上图的pid一致，说明端口已经被打开。</p>
+<p>或者在OSX上安装MongoDB</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap mongodb/brew </span><br><span class="line">brew install mongodb-community@4.2</span><br></pre></td></tr></table></figure>
+<p>启动和关闭</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb-community@4.2</span><br><span class="line">brew services stop mongodb-community@4.2</span><br></pre></td></tr></table></figure>
+<h3 id="配置node.js">配置node.js</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<p>在项目下需要安装的node.js模块</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install express --save</span><br><span class="line">npm install body-parser --save</span><br><span class="line">npm install cookie-parser --save</span><br><span class="line">npm install multer --save</span><br><span class="line">npm install mongodb --save</span><br></pre></td></tr></table></figure>
+<p>其中</p>
+<ul>
+<li><p>express是我们使用的前端框架</p></li>
+<li><p>body-parser用于处理 JSON, Raw, Text 和 URL 编码的数据。</p></li>
+<li><p>cookie-parser解析Cookie</p></li>
+<li><p>multer 用于处理MIME编码的表单数据。</p></li>
+</ul>
+<h2 id="主要代码">主要代码</h2>
+<h3 id="后端">后端</h3>
+<p>项目的后端是Express和MongoDB，在项目目录下启动<code>node backend.js</code>启动后端。</p>
+<h4 id="express">Express</h4>
+<p>启动Express</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br></pre></td></tr></table></figure>
+<p>后端程序中需要处理浏览器的跨域请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.all(<span class="string">&#x27;*&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    res.header(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">    res.header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;PUT, GET, POST, DELETE, OPTIONS&#x27;</span>);</span><br><span class="line">    res.header(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;X-Requested-With&quot;</span>);</span><br><span class="line">    res.header(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>设置主页面、登录和注册界面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/main.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.sendFile(__dirname + <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;main.html&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">app.get(<span class="string">&#x27;/login.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.sendFile(__dirname + <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;login.html&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">app.get(<span class="string">&#x27;/register.html&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.sendFile(__dirname + <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;register.html&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>将主界面作为默认界面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.sendFile(__dirname + <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;main.html&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>为注册和登录操作添加接口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">&#x27;/process_login&#x27;</span>, urlencodedParser, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userName = req.body.userName;</span><br><span class="line">    <span class="keyword">var</span> pwd = req.body.pwd; </span><br><span class="line">    <span class="keyword">if</span> (!userName) &#123;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;用户名不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!pwd) &#123;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;密码不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        db.searchUser(&#123; <span class="attr">name</span>: userName &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (result.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (result[<span class="number">0</span>].name == userName &amp;&amp; result[<span class="number">0</span>].pwd == pwd) &#123;</span><br><span class="line">                    res.json(&#123; <span class="attr">code</span>: <span class="number">0</span>, <span class="attr">message</span>: <span class="string">&#x27;登录成功&#x27;</span> &#125;); </span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;用户名或密码错误&#x27;</span> &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;不存在该用户&#x27;</span> &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/process_register&#x27;</span>, urlencodedParser, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userName = req.body.userName;</span><br><span class="line">    <span class="keyword">var</span> pwd = req.body.pwd;</span><br><span class="line">    <span class="keyword">if</span> (!userName) &#123;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;用户名不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!pwd) &#123;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;密码不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        db.searchUser(&#123; <span class="attr">name</span>: userName &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (result.length &gt; <span class="number">0</span> &amp;&amp; result[<span class="number">0</span>].name == userName) &#123;</span><br><span class="line">                res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;用户已存在，可直接登录&#x27;</span> &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// res.json(&#123; code: -1, message: &#x27;不存在该用户&#x27; &#125;);</span></span><br><span class="line">                db.insertUser(&#123; <span class="attr">name</span>: userName, <span class="attr">pwd</span>: pwd &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">insertResult</span>) </span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(insertResult)</span><br><span class="line">                    <span class="keyword">if</span> (insertResult.insertedCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        res.json(&#123; <span class="attr">code</span>: <span class="number">0</span>, <span class="attr">message</span>: <span class="string">&#x27;注册成功&#x27;</span> &#125;);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        res.json(&#123; <span class="attr">code</span>: -<span class="number">1</span>, <span class="attr">message</span>: <span class="string">&#x27;注册失败，请重新注册&#x27;</span> &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>最后是开启后端，监听<code>8008</code>端口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8008</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;后端启动成功！&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="mongodb-1">MongoDB</h4>
+<p>建立MongoDB对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db = <span class="built_in">require</span>(<span class="string">&#x27;./db&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>建立<code>db.js</code>文件，编写数据库相关操作</p>
+<p>通过默认端口访问MongoDB</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoClient = <span class="built_in">require</span>(<span class="string">&#x27;mongodb&#x27;</span>).MongoClient;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;mongodb://127.0.0.1:27017/&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>MongoDB会在我们进行数据路操作的时候自动建立相应的数据库，我们只需要负责编写插入和查询的代码，数据库的名字是<code>login_project</code>，下面是查找和插入的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">searchUser</span>(<span class="params">whereStr, callBack</span>) </span>&#123;</span><br><span class="line">    mongoClient.connect(url, &#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, db</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">        <span class="keyword">var</span> dbo = db.db(<span class="string">&#x27;login_project&#x27;</span>);</span><br><span class="line">        dbo.collection(<span class="string">&#x27;site&#x27;</span>).find(whereStr).toArray(<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;查询指定条件的数据...&#x27;</span>, result);</span><br><span class="line">            callBack(result);</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertUser</span>(<span class="params">myobj, callBack</span>) </span>&#123;</span><br><span class="line">    mongoClient.connect(url, &#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, db</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">        <span class="keyword">var</span> dbo = db.db(<span class="string">&#x27;login_project&#x27;</span>);</span><br><span class="line">        dbo.collection(<span class="string">&#x27;site&#x27;</span>).insertOne(myobj, <span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;文档插入成功&#x27;</span>);</span><br><span class="line">            callBack(res);</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，允许这两个函数被外部文件调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.searchUser = searchUser;</span><br><span class="line"><span class="built_in">exports</span>.insertUser = insertUser;</span><br></pre></td></tr></table></figure>
+<h3 id="前端">前端</h3>
+<p>前端主要的工作是<code>main.html</code>、<code>register.html</code>和<code>login.html</code>的编写。</p>
+<p>三个界面的公共部分是导航栏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;main.html&quot;</span>&gt;</span>主页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;login.html&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;register.html&quot;</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="main.html">main.html</h4>
+<p><code>main.html</code>页面通过<code>js</code>通过url获得当前的用户名并给出提示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name =  getUrlParameter(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(name);</span><br><span class="line"><span class="keyword">if</span>(name != <span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;info&quot;</span>).innerHTML = <span class="string">&quot;当前登陆的账号为：&quot;</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrlParameter</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  name = name.replace(<span class="regexp">/[]/</span>,<span class="string">&quot;\[&quot;</span>).replace(<span class="regexp">/[]/</span>,<span class="string">&quot;\[&quot;</span>).replace(<span class="regexp">/[]/</span>,<span class="string">&quot;\\\]&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> regexS = <span class="string">&quot;[\\?&amp;]&quot;</span>+name+<span class="string">&quot;=([^&amp;#]*)&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>( regexS );</span><br><span class="line">  <span class="keyword">var</span> results = regex.exec(<span class="built_in">window</span>.parent.location.href );</span><br><span class="line">  <span class="keyword">if</span>( results == <span class="literal">null</span> ) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>; </span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">  	<span class="keyword">return</span> results[<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过上面的<code>js</code>自动更改html中的信息</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">&quot;info&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>欢迎使用NJU-SE-Web系统<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">&quot;info&quot;</span>&gt;</span>请登陆！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="login.html">login.html</h4>
+<p>登陆界面如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>欢迎登录NJU-SE-Web系统<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-list&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">span</span>&gt;</span>用户名：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">id</span>=<span class="string">&quot;name&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">span</span>&gt;</span>密码：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;userpwd&quot;</span> <span class="attr">id</span>=<span class="string">&quot;pwd&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;verifi-code&quot;</span> <span class="attr">style</span>=<span class="string">&#x27;width:110px;height:25px&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;input-code&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入验证码&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;submit()&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用js完成登陆后的页面切换和数据库查询</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">submit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = $(<span class="string">&quot;#name&quot;</span>).val().trim();</span><br><span class="line">  <span class="keyword">var</span> pwd = $(<span class="string">&quot;#pwd&quot;</span>).val().trim(); </span><br><span class="line">  $.ajax(&#123;</span><br><span class="line">    url: <span class="string">&quot;http://127.0.0.1:8008/process_login&quot;</span>,</span><br><span class="line">    type: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      userName: name,</span><br><span class="line">      pwd: pwd</span><br><span class="line">    &#125;,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res);</span><br><span class="line">      <span class="keyword">if</span> (res.code == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">&#x27;main.html?name=&#x27;</span> + name;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(res.message);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">&quot;网络出错&quot;</span>);</span><br><span class="line">      alert(<span class="string">&quot;网络出错，请再试一次&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，通过url将登陆用户的信息传递给<code>main.html</code>页面。</p>
+<p>如果ajax请求成功则页面跳转，如果登陆失败则给出提示信息。</p>
+<p>通过js代码实现验证码生成</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCode</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> code = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> codeLength = <span class="number">4</span>;</span><br><span class="line">  <span class="keyword">var</span> selectChar = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;I&#x27;</span>,<span class="string">&#x27;J&#x27;</span>,<span class="string">&#x27;K&#x27;</span>,<span class="string">&#x27;L&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;P&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>,<span class="string">&#x27;R&#x27;</span>,<span class="string">&#x27;S&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="string">&#x27;V&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; codeLength; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> charIndex = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">36</span>);</span><br><span class="line">    code += selectChar[charIndex];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在canvas上画出验证码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw_canvas</span>(<span class="params">code</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (canvas) &#123;</span><br><span class="line">    <span class="keyword">var</span> ctx=canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    ctx.clearRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</span><br><span class="line">    ctx.font=<span class="string">&quot;80px Verdana&quot;</span>;</span><br><span class="line">    ctx.strokeText(code,<span class="number">25</span>,<span class="number">110</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;canvas 绘制完成&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">&quot;没有找到canvas&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编写函数检查字符串是否相同，并给出提示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isequal</span>(<span class="params">str,str1,alert_info</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(str != str1)&#123;</span><br><span class="line">  	alert(alert_info);</span><br><span class="line">  	<span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>submit</code>函数中检查</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input_code = $(<span class="string">&quot;#input-code&quot;</span>).val().trim(); </span><br><span class="line"><span class="keyword">if</span>(!isequal(code, input_code, <span class="string">&quot;验证码错误&quot;</span>)) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>同时，需要在加载页面时加载这个验证码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;verifi-code&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> code = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  code = createCode();</span><br><span class="line">  draw_canvas(code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以及支持验证码点击刷新</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">canvas.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  code = createCode();</span><br><span class="line">  draw_canvas(code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="register.html">register.html</h4>
+<p><code>register.html</code>和<code>login.html</code>大致相同，主要的区别是<code>register.html</code>需要对密码进行二次验证，在<code>submit</code>函数中进行检验</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pwd = $(<span class="string">&quot;#pwd&quot;</span>).val().trim(); </span><br><span class="line"><span class="keyword">var</span> pwda = $(<span class="string">&quot;#pwda&quot;</span>).val().trim(); </span><br><span class="line"><span class="keyword">if</span>(!isequal(pwd, pwda, <span class="string">&quot;两次输入不一致&quot;</span>)) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>如果验证通过，则向数据库中插入信息，如果ajax请求成功，则实现跳转</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">  <span class="keyword">if</span> (res.code == <span class="number">0</span>) &#123;</span><br><span class="line">    alert(<span class="string">&quot;注册成功&quot;</span>);</span><br><span class="line">    <span class="built_in">window</span>.location.href = <span class="string">&#x27;main.html?name=&#x27;</span> + name;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  	alert(res.message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E4%B8%8D%E5%81%9A%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag"># 不做程序员</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/13/Transmission%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" rel="next" title="Transmission服务器端搭建">
+                <i class="fa fa-chevron-left"></i> Transmission服务器端搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FrankTianTT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:franktian424@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/tian-hong-long-29" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/212216723/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3235671194" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">结果展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb"><span class="nav-number">1.1.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEnode.js"><span class="nav-number">1.2.</span> <span class="nav-text">配置node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">主要代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF"><span class="nav-number">2.1.</span> <span class="nav-text">后端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#express"><span class="nav-number">2.1.1.</span> <span class="nav-text">Express</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mongodb-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">MongoDB</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">2.2.</span> <span class="nav-text">前端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main.html"><span class="nav-number">2.2.1.</span> <span class="nav-text">main.html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#login.html"><span class="nav-number">2.2.2.</span> <span class="nav-text">login.html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register.html"><span class="nav-number">2.2.3.</span> <span class="nav-text">register.html</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frank Tian</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
