@@ -226,7 +226,7 @@
 </ul>
 <p>改Transmission的设置遇到的坑我真是数都数不过来。。。</p>
 <a id="more"></a>
-<h2 id="part-1">Part 1</h2>
+<h2 id="硬盘挂载">硬盘挂载</h2>
 <p>使用<code>df</code>和<code>du</code>两个指令查看磁盘的情况，可以查看RetHat官方的<a href="https://www.redhat.com/sysadmin/du-vs-df">文章</a>（复习的时候看到RetHat的商业模式是免费试用，付费咨询，老增值模式了）。</p>
 <p>简单来说<code>df</code>是<code>disk free</code>，查看磁盘的<strong>大小</strong>，<strong>使用</strong>和<strong>剩余</strong>。通常使用<code>df -h</code>，可以把字节以”方便人类阅读“的形式展现。</p>
 <p><code>du</code>是<code>disk usage</code>，更多用来查看子目录的使用情况。</p>
@@ -264,7 +264,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">UUID=&#123;你的硬盘的uuid&#125;  /u01  ext4  defaults  1  1</span><br></pre></td></tr></table></figure>
 <p>别忘了设着硬盘的所有者为你</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chown -R frank:frank ~/MHD</span><br></pre></td></tr></table></figure>
-<h2 id="part-2">Part 2</h2>
+<h2 id="transmission用户设置">Transmission用户设置</h2>
 <p>安装<code>transmission-daemon</code>，这玩意是transmission的守护进程，它会帮你下载<code>transmission-cli</code>什么的。不过我们配置好了就不需要用命令行了（用命令行做种也太古早了）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install transmission-daemon</span><br></pre></td></tr></table></figure>
 <p>下载好了它就会自动开启，这时候要先关闭它</p>
@@ -276,7 +276,7 @@
 <p>最后给配置文件的用户改成你自己</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chown -R frank:frank /etc/transmission-daemon</span><br><span class="line">sudo chown -R frank:frank /var/lib/transmission-daemon/</span><br></pre></td></tr></table></figure>
 <p>现在还不能启动，要再把网络权限改一下</p>
-<h2 id="part-3">Part 3</h2>
+<h2 id="transmission远程管理设置">Transmission远程管理设置</h2>
 <p>打开<code>/etc/transmission-daemon/settings.json</code></p>
 <p>要更改的是下面的内容</p>
 <ul>
@@ -288,7 +288,7 @@
 <p>注意这个文件的拥有者也要是你自己。</p>
 <p>最后，介绍一个很好用的web界面，仓库地址是https://github.com/ronggang/transmission-web-control。</p>
 <p>下载releases的版本之后安装就好了。</p>
-<h2 id="part-4">Part 4</h2>
+<h2 id="enjoy">Enjoy!</h2>
 <p>打开守护进程</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service transmission-daemon start</span><br></pre></td></tr></table></figure>
 <p>在自己的电脑上打开网页<code>&#123;服务器的ip&#125;:9091</code></p>
