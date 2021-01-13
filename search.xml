@@ -304,7 +304,7 @@
   </entry>
   <entry>
     <title>web作业遗产：node.js+express+mongodb+ajax实现注册、登陆、验证码</title>
-    <url>/2021/01/13/web%E4%BD%9C%E4%B8%9A%E9%81%97%E4%BA%A7/</url>
+    <url>/2020/12/26/web%E4%BD%9C%E4%B8%9A%E9%81%97%E4%BA%A7/</url>
     <content><![CDATA[<p>好不容易把web作业写完了，把报告贴在这里，鉴于不出一个月我就会把知识还出去（也不知道还给谁，毕竟都是自学的），这博客上开贴留念一下。</p>
 <p>完整项目在<a href="https://github.com/FrankTianTT/login-express">这里</a>，欢迎star。（不会真有人star吧）</p>
 <p>本项目借鉴了<a href="https://github.com/Lemon-Yan/node-login">这个项目</a>，大家也可以去star。</p>
