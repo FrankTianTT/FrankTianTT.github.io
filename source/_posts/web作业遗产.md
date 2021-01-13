@@ -1,6 +1,6 @@
 ---
 title: web作业遗产：node.js+express+mongodb+ajax实现注册、登陆、验证码
-date: 2021-01-13 16:22:37
+date: 2020-12-26 16:22:37
 categories:
   - 技术
 tags:
