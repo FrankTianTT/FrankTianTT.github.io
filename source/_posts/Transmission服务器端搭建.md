@@ -22,7 +22,7 @@ tags:
 
 <!--more-->
 
-## Part 1
+## 硬盘挂载
 
 使用`df`和`du`两个指令查看磁盘的情况，可以查看RetHat官方的[文章](https://www.redhat.com/sysadmin/du-vs-df)（复习的时候看到RetHat的商业模式是免费试用，付费咨询，老增值模式了）。
 
@@ -104,7 +104,7 @@ UUID={你的硬盘的uuid}  /u01  ext4  defaults  1  1
 sudo chown -R frank:frank ~/MHD
 ```
 
-## Part 2
+## Transmission用户设置
 
 安装```transmission-daemon```，这玩意是transmission的守护进程，它会帮你下载```transmission-cli```什么的。不过我们配置好了就不需要用命令行了（用命令行做种也太古早了）
 
@@ -139,7 +139,7 @@ sudo chown -R frank:frank /var/lib/transmission-daemon/
 
 现在还不能启动，要再把网络权限改一下
 
-## Part 3
+## Transmission远程管理设置
 
 打开`/etc/transmission-daemon/settings.json`
 
@@ -157,7 +157,7 @@ sudo chown -R frank:frank /var/lib/transmission-daemon/
 
 下载releases的版本之后安装就好了。
 
-## Part 4
+## Enjoy!
 
 打开守护进程
 
