@@ -13,6 +13,8 @@ tags:
 
 本项目借鉴了[这个项目](https://github.com/Lemon-Yan/node-login)，大家也可以去star。
 
+<!--more-->
+
 ## 结果展示
 
 实现的功能：
